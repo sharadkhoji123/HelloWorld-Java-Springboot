@@ -4,7 +4,7 @@ pipeline {
    stages {
       stage('Build') {
          steps {
-            echo 'Build'
+            sh './jenkins/build.sh'
          }
       }
       stage('Create Docker Image') {
