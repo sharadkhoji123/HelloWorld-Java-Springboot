@@ -28,7 +28,7 @@ pipeline {
       }
       stage('Deploy on Testing Environment') {
          steps {
-            sh "docker service create -d -p 8000:8080 coolgourav147/javaproject:${BUILD_ID}"
+            sh "docker service create --name javaproject -d -p 8000:8080 coolgourav147/javaproject:${BUILD_ID} || docker service update --image=coolgourav147/javaproject:${BUILD_ID} javaproject"
          }
       }
       stage('Deploy on Staging Environment') {
