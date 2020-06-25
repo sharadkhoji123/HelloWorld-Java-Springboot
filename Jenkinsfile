@@ -9,7 +9,7 @@ pipeline {
       }
       stage('Create Docker Image') {
          steps {
-            echo 'Create Docker Image'
+            sh './jenkins/build_docker_image.sh'
          }
       }
       stage('Push Docker Image') {
