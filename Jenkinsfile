@@ -14,7 +14,7 @@ pipeline {
       }
       stage('Push Docker Image') {
          environment {
-                SERVICE_CREDS = credentials(&apos;test&apos;)
+                SERVICE_CREDS = credentials('dckerhub')
          }
          steps {
             sh "docker login --username=$SERVICE_CREDS_USR --password=$SERVICE_CREDS_PSW";
