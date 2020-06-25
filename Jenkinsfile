@@ -19,6 +19,7 @@ pipeline {
          steps {
             sh "docker login --username=$SERVICE_CREDS_USR --password=$SERVICE_CREDS_PSW";
             sh "docker image push coolgourav147/javaproject:${BUILD_ID}";
+	    sh "docker image rm coolgourav147/javaproject:${BUILD_ID}"
          }
       }
       stage('Testing') {
