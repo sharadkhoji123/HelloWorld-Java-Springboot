@@ -13,8 +13,12 @@ pipeline {
          }
       }
       stage('Push Docker Image') {
+         environment {
+                SERVICE_CREDS = credentials(&apos;test&apos;)
+         }
          steps {
-            echo 'Push Docker Image'
+            sh "docker login --username=$SERVICE_CREDS_USR --password=$SERVICE_CREDS_PSW";
+            sh "docker image push coolgourav147/javaproject:${BUILD_ID}";
          }
       }
       stage('Testing') {
@@ -24,7 +28,7 @@ pipeline {
       }
       stage('Deploy on Testing Environment') {
          steps {
-            echo 'Testing'
+            echo "docker service create -d -p 8000:8080 coolgourav147/javaproject:${BUILD_ID}"
          }
       }
       stage('Deploy on Staging Environment') {
