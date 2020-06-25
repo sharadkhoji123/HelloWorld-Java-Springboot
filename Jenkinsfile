@@ -34,13 +34,21 @@ pipeline {
       }
       stage('Deploy on Staging Environment') {
          steps {
-            echo 'Staging'
+            sh 'docker context use staging'
+            sh "docker service create --with-registry-auth --name javaproject -d -p 8000:8080 coolgourav147/javaproject:${BUILD_ID} || docker service update --with-registry-auth --image=coolgourav147/javaproject:${BUILD_ID} javaproject"
          }
       }
       stage('Deploy on Production Environment') {
          steps {
+	    sh 'docker context use prod'
+            sh "docker service create --with-registry-auth --name javaproject -d -p 8000:8080 coolgourav147/javaproject:${BUILD_ID} || docker service update --with-registry-auth --image=coolgourav147/javaproject:${BUILD_ID} javaproject"
             echo 'Production Environment'
          }
       }
    }
+   post { 
+        always { 
+            sh 'docker context use default'
+        }
+    }
 }
