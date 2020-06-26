@@ -9,7 +9,7 @@ pipeline {
       }
       stage('Create Docker Image') {
          steps {
-            sh 'echo "create docker image.'
+            sh 'echo "create docker image."'
          }
       }
       stage('Push Docker Image') {
