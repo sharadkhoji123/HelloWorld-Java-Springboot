@@ -7,10 +7,10 @@ pipeline {
             sh './jenkins/build.sh'
          }
       }
-      stage('Create Docker Image') {
+      stage('Store Jar file in Repositrory') {
          steps {
-             rtUpload (
-               serverId: 'artifactoryServer',
+            rtUpload (
+               serverId: 'localarticatory',
                spec: '''{
                    "files": [
                       {
@@ -19,6 +19,11 @@ pipeline {
                       }
                   ]
              }''')
+         }
+      }
+      stage('Create Docker Image') {
+         steps {
+           echo "create Docker Image"
          }
       }
       stage('Push Docker Image') {
