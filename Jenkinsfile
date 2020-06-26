@@ -15,7 +15,7 @@ pipeline {
                    "files": [
                       {
                            "pattern": "**/*.jar",
-                           "target": "generic-local"
+                           "target": "generic-local/${BUILD_ID}/"
                       }
                   ]
              }''')
