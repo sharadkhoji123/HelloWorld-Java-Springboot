@@ -33,7 +33,7 @@ pipeline {
       }
       stage('Testing') {
          steps {
-            echo 'Unit Testing'
+            sh 'docker container run --rm -v $(pwd):/app -w /app maven:3-jdk-11 mvn test'
          }
       }
       stage('Deploy on Testing Environment') {
