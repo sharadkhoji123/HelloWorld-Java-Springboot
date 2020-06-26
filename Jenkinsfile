@@ -9,7 +9,16 @@ pipeline {
       }
       stage('Create Docker Image') {
          steps {
-            sh 'echo "create docker image."'
+             rtUpload (
+               serverId: 'artifactoryServer',
+               spec: '''{
+                   "files": [
+                      {
+                           "pattern": "**/*.jar",
+                           "target": "generic-local"
+                      }
+                  ]
+             }''')
          }
       }
       stage('Push Docker Image') {
